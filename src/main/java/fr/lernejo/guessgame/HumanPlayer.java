@@ -1,25 +1,23 @@
 package fr.lernejo.guessgame;
 
-import fr.lernejo.logger.Logger;
 import fr.lernejo.logger.LoggerFactory;
+import fr.lernejo.logger.Logger;
 
 import java.util.Scanner;
 
-public class HumanPlayer implements Player {
-    Logger logger = LoggerFactory.getLogger("Player");
-    Scanner scanner = new Scanner(System.in);
+public class HumanPlayer implements Player{
 
+    private Logger logger = LoggerFactory.getLogger( "player" );
     @Override
-    public long askNextGuess() {
-        return scanner.nextInt();
+    public Long askNextGuess() {
+        Scanner scanner = new Scanner( System.in );
+        System.out.print( "Number:" );
+        return scanner.nextLong();
     }
 
+    // true means that input value was lower, thus expected value is greater
     @Override
-    public void respond(boolean lowerOrGreater) {
-        if (lowerOrGreater){
-            System.out.println("Le nombre est le plus grand");
-        } else {
-            System.out.println("Le nombre estv plus petit");
-        }
+    public void respond( boolean lowerOrGreater ) {
+        logger.log( "Input number is " + ( lowerOrGreater ? "lower" : "greater") + " than the number to guess" );
     }
 }
